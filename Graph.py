@@ -33,6 +33,13 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-image = mpimg.imread("./Client/AV45/AV45_r79SqA.jpg")
-plt.imshow(image)
-plt.show()
+img = mpimg.imread("./Client/AV45/OAS30001_AV45_d2430_p0_t.jpg")
+# plt.imshow(img)
+# plt.show()
+
+from pylab import *
+from mpl_toolkits.mplot3d import Axes3D
+x, y = ogrid[0:img.shape[0], 0:img.shape[1]]
+ax = gca(projection='3d')
+ax.plot_surface(x, y, 10, rstride=5, cstride=5, facecolors=img)
+show()

@@ -21,7 +21,6 @@ def data_mine_tracer(tracer):
         executor.map(process_scan_path, scans)
 
 all_t = get_tracers()
-print(all_t)
 for tracer in all_t:
     data_mine_tracer(tracer)
 

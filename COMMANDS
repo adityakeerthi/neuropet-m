@@ -2,3 +2,4 @@ export GOOGLE_APPLICATION_CREDENTIALS="C:\Users\ak\Documents\GitHub\NeuroPET-M\A
 curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86_64.tar.gz
 tar -xf google-cloud-sdk-321.0.0-linux-x86_64.tar.gz
 export DISPLAY=:0
+python3 setup.py build_ext --inplace

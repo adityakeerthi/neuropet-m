@@ -47,14 +47,12 @@ cpdef process_scan_path(scan_path):
     cdef list rgb = []
     cdef double concentration = 0.0
     H, W, Channels = Scan.shape
-    print(H, W)
     for x in range(H):
         for y in range(W):
             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
-            if rgb != [0, 0, 0]:
-                concentration = RGB_to_Concentration(rgb)
-                if concentration != 0.0:
-                    data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
-                    file_write.file_write(data)
+            concentration = RGB_to_Concentration(rgb)
+            if concentration > 1.0:
+                data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
+                file_write.write(data)
     file_write.close()
     return True

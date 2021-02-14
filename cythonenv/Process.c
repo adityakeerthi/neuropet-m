@@ -1168,18 +1168,8 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
-/* Print.proto */
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
-
-/* PrintOne.proto */
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
@@ -1355,10 +1345,8 @@ static const char __pyx_k_166[] = "166";
 static const char __pyx_k_167[] = "167";
 static const char __pyx_k_168[] = "168";
 static const char __pyx_k_cv2[] = "cv2";
-static const char __pyx_k_end[] = "end";
 static const char __pyx_k_txt[] = ".txt";
 static const char __pyx_k_Data[] = "/Data/";
-static const char __pyx_k_file[] = "file";
 static const char __pyx_k_item[] = "item";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_math[] = "math";
@@ -1367,16 +1355,15 @@ static const char __pyx_k_open[] = "open";
 static const char __pyx_k_sqrt[] = "sqrt";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_close[] = "close";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_round[] = "round";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_split[] = "split";
+static const char __pyx_k_write[] = "write";
 static const char __pyx_k_Client[] = "../Client/";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_imread[] = "imread";
-static const char __pyx_k_file_write[] = "file_write";
 static const char __pyx_k_concentration[] = "concentration";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_x_y_z_concentration[] = "{x}, {y}, {z}, {concentration} \n";
@@ -1519,9 +1506,6 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_close;
 static PyObject *__pyx_n_s_concentration;
 static PyObject *__pyx_n_s_cv2;
-static PyObject *__pyx_n_s_end;
-static PyObject *__pyx_n_s_file;
-static PyObject *__pyx_n_s_file_write;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_imread;
@@ -1531,7 +1515,6 @@ static PyObject *__pyx_n_s_math;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_open;
 static PyObject *__pyx_n_s_os;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_round;
 static PyObject *__pyx_n_s_shape;
@@ -1540,6 +1523,7 @@ static PyObject *__pyx_n_s_sqrt;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_s_txt;
 static PyObject *__pyx_kp_s_w;
+static PyObject *__pyx_n_s_write;
 static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_kp_s_x_y_z_concentration;
 static PyObject *__pyx_n_s_y;
@@ -3359,7 +3343,7 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
  *     cdef list rgb = []
  *     cdef double concentration = 0.0             # <<<<<<<<<<<<<<
  *     H, W, Channels = Scan.shape
- *     print(H, W)
+ *     for x in range(H):
  */
   __pyx_v_concentration = 0.0;
 
@@ -3367,8 +3351,8 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
  *     cdef list rgb = []
  *     cdef double concentration = 0.0
  *     H, W, Channels = Scan.shape             # <<<<<<<<<<<<<<
- *     print(H, W)
  *     for x in range(H):
+ *         for y in range(W):
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_shape); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3438,28 +3422,6 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
   /* "Process.pyx":50
  *     cdef double concentration = 0.0
  *     H, W, Channels = Scan.shape
- *     print(H, W)             # <<<<<<<<<<<<<<
- *     for x in range(H):
- *         for y in range(W):
- */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_H); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_W); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4);
-  __pyx_t_2 = 0;
-  __pyx_t_4 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "Process.pyx":51
- *     H, W, Channels = Scan.shape
- *     print(H, W)
  *     for x in range(H):             # <<<<<<<<<<<<<<
  *         for y in range(W):
  *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
@@ -3469,30 +3431,30 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_8; __pyx_t_7+=1) {
     __pyx_v_x = __pyx_t_7;
 
-    /* "Process.pyx":52
- *     print(H, W)
+    /* "Process.pyx":51
+ *     H, W, Channels = Scan.shape
  *     for x in range(H):
  *         for y in range(W):             # <<<<<<<<<<<<<<
  *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
- *             if rgb != [0, 0, 0]:
+ *             concentration = RGB_to_Concentration(rgb)
  */
     __pyx_t_10 = __pyx_v_W;
     __pyx_t_11 = __pyx_t_10;
     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
       __pyx_v_y = __pyx_t_12;
 
-      /* "Process.pyx":53
+      /* "Process.pyx":52
  *     for x in range(H):
  *         for y in range(W):
  *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]             # <<<<<<<<<<<<<<
- *             if rgb != [0, 0, 0]:
- *                 concentration = RGB_to_Concentration(rgb)
+ *             concentration = RGB_to_Concentration(rgb)
+ *             if concentration > 1.0:
  */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_5 = NULL;
       __pyx_t_13 = 0;
@@ -3508,50 +3470,50 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
       }
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_2, __pyx_t_3, __pyx_int_2};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_1, __pyx_t_3, __pyx_int_2};
+        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __Pyx_GOTREF(__pyx_t_1);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_2, __pyx_t_3, __pyx_int_2};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_1, __pyx_t_3, __pyx_int_2};
+        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __Pyx_GOTREF(__pyx_t_1);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       {
-        __pyx_t_14 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_5); __pyx_t_5 = NULL;
         }
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_13, __pyx_t_2);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_13, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_14, 1+__pyx_t_13, __pyx_t_3);
         __Pyx_INCREF(__pyx_int_2);
         __Pyx_GIVEREF(__pyx_int_2);
         PyTuple_SET_ITEM(__pyx_t_14, 2+__pyx_t_13, __pyx_int_2);
-        __pyx_t_2 = 0;
+        __pyx_t_1 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_5 = NULL;
       __pyx_t_13 = 0;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_14))) {
@@ -3566,49 +3528,49 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
       }
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_14)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_3, __pyx_t_2, __pyx_int_1};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_3, __pyx_t_1, __pyx_int_1};
+        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_14)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_3, __pyx_t_2, __pyx_int_1};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_3, __pyx_t_1, __pyx_int_1};
+        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else
       #endif
       {
-        __pyx_t_15 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 53, __pyx_L1_error)
+        __pyx_t_15 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_15);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_5); __pyx_t_5 = NULL;
         }
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_15, 0+__pyx_t_13, __pyx_t_3);
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_13, __pyx_t_2);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_13, __pyx_t_1);
         __Pyx_INCREF(__pyx_int_1);
         __Pyx_GIVEREF(__pyx_int_1);
         PyTuple_SET_ITEM(__pyx_t_15, 2+__pyx_t_13, __pyx_int_1);
         __pyx_t_3 = 0;
-        __pyx_t_2 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_15, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 53, __pyx_L1_error)
+        __pyx_t_1 = 0;
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_15, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
       }
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-      __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_Scan, __pyx_n_s_item); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_15);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_5 = NULL;
       __pyx_t_13 = 0;
@@ -3624,205 +3586,172 @@ static PyObject *__pyx_f_7Process_process_scan_path(PyObject *__pyx_v_scan_path,
       }
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_15)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_2, __pyx_t_3, __pyx_int_0};
-        __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_1, __pyx_t_3, __pyx_int_0};
+        __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_15)) {
-        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_2, __pyx_t_3, __pyx_int_0};
-        __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
+        PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_t_1, __pyx_t_3, __pyx_int_0};
+        __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_13, 3+__pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       {
-        __pyx_t_16 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 53, __pyx_L1_error)
+        __pyx_t_16 = PyTuple_New(3+__pyx_t_13); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_16);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_5); __pyx_t_5 = NULL;
         }
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_16, 0+__pyx_t_13, __pyx_t_2);
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_16, 0+__pyx_t_13, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_16, 1+__pyx_t_13, __pyx_t_3);
         __Pyx_INCREF(__pyx_int_0);
         __Pyx_GIVEREF(__pyx_int_0);
         PyTuple_SET_ITEM(__pyx_t_16, 2+__pyx_t_13, __pyx_int_0);
-        __pyx_t_2 = 0;
+        __pyx_t_1 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 53, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 52, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       }
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      __pyx_t_15 = PyList_New(3); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 53, __pyx_L1_error)
+      __pyx_t_15 = PyList_New(3); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 52, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_15);
-      __Pyx_GIVEREF(__pyx_t_1);
-      PyList_SET_ITEM(__pyx_t_15, 0, __pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_2);
+      PyList_SET_ITEM(__pyx_t_15, 0, __pyx_t_2);
       __Pyx_GIVEREF(__pyx_t_4);
       PyList_SET_ITEM(__pyx_t_15, 1, __pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_14);
       PyList_SET_ITEM(__pyx_t_15, 2, __pyx_t_14);
-      __pyx_t_1 = 0;
+      __pyx_t_2 = 0;
       __pyx_t_4 = 0;
       __pyx_t_14 = 0;
       __Pyx_DECREF_SET(__pyx_v_rgb, ((PyObject*)__pyx_t_15));
       __pyx_t_15 = 0;
 
-      /* "Process.pyx":54
+      /* "Process.pyx":53
  *         for y in range(W):
  *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
- *             if rgb != [0, 0, 0]:             # <<<<<<<<<<<<<<
- *                 concentration = RGB_to_Concentration(rgb)
- *                 if concentration != 0.0:
+ *             concentration = RGB_to_Concentration(rgb)             # <<<<<<<<<<<<<<
+ *             if concentration > 1.0:
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
  */
-      __pyx_t_15 = PyList_New(3); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 54, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_15);
-      __Pyx_INCREF(__pyx_int_0);
-      __Pyx_GIVEREF(__pyx_int_0);
-      PyList_SET_ITEM(__pyx_t_15, 0, __pyx_int_0);
-      __Pyx_INCREF(__pyx_int_0);
-      __Pyx_GIVEREF(__pyx_int_0);
-      PyList_SET_ITEM(__pyx_t_15, 1, __pyx_int_0);
-      __Pyx_INCREF(__pyx_int_0);
-      __Pyx_GIVEREF(__pyx_int_0);
-      PyList_SET_ITEM(__pyx_t_15, 2, __pyx_int_0);
-      __pyx_t_14 = PyObject_RichCompare(__pyx_v_rgb, __pyx_t_15, Py_NE); __Pyx_XGOTREF(__pyx_t_14); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 54, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      __pyx_t_17 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_17 < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+      __pyx_v_concentration = __pyx_f_7Process_RGB_to_Concentration(__pyx_v_rgb);
+
+      /* "Process.pyx":54
+ *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
+ *             concentration = RGB_to_Concentration(rgb)
+ *             if concentration > 1.0:             # <<<<<<<<<<<<<<
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
+ *                 file_write.write(data)
+ */
+      __pyx_t_17 = ((__pyx_v_concentration > 1.0) != 0);
       if (__pyx_t_17) {
 
         /* "Process.pyx":55
- *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
- *             if rgb != [0, 0, 0]:
- *                 concentration = RGB_to_Concentration(rgb)             # <<<<<<<<<<<<<<
- *                 if concentration != 0.0:
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
- */
-        __pyx_v_concentration = __pyx_f_7Process_RGB_to_Concentration(__pyx_v_rgb);
-
-        /* "Process.pyx":56
- *             if rgb != [0, 0, 0]:
- *                 concentration = RGB_to_Concentration(rgb)
- *                 if concentration != 0.0:             # <<<<<<<<<<<<<<
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
- *                     file_write.file_write(data)
- */
-        __pyx_t_17 = ((__pyx_v_concentration != 0.0) != 0);
-        if (__pyx_t_17) {
-
-          /* "Process.pyx":57
- *                 concentration = RGB_to_Concentration(rgb)
- *                 if concentration != 0.0:
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)             # <<<<<<<<<<<<<<
- *                     file_write.file_write(data)
+ *             concentration = RGB_to_Concentration(rgb)
+ *             if concentration > 1.0:
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)             # <<<<<<<<<<<<<<
+ *                 file_write.write(data)
  *     file_write.close()
  */
-          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_x_y_z_concentration, __pyx_n_s_format); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_15 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_15);
-          __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_x, __pyx_t_4) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_y, __pyx_t_4) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_z, __pyx_v_depth) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-          __pyx_t_4 = PyFloat_FromDouble(__pyx_v_concentration); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_concentration, __pyx_t_4) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_empty_tuple, __pyx_t_15); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          __Pyx_XDECREF_SET(__pyx_v_data, __pyx_t_4);
-          __pyx_t_4 = 0;
+        __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_x_y_z_concentration, __pyx_n_s_format); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        __pyx_t_14 = __Pyx_PyDict_NewPresized(4); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_14);
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_x, __pyx_t_4) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_y, __pyx_t_4) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_z, __pyx_v_depth) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_concentration); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_concentration, __pyx_t_4) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_empty_tuple, __pyx_t_14); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+        __Pyx_XDECREF_SET(__pyx_v_data, __pyx_t_4);
+        __pyx_t_4 = 0;
 
-          /* "Process.pyx":58
- *                 if concentration != 0.0:
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
- *                     file_write.file_write(data)             # <<<<<<<<<<<<<<
+        /* "Process.pyx":56
+ *             if concentration > 1.0:
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
+ *                 file_write.write(data)             # <<<<<<<<<<<<<<
  *     file_write.close()
  *     return True
  */
-          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_write, __pyx_n_s_file_write); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 58, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_15);
-          __pyx_t_14 = NULL;
-          if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-            __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_15);
-            if (likely(__pyx_t_14)) {
-              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-              __Pyx_INCREF(__pyx_t_14);
-              __Pyx_INCREF(function);
-              __Pyx_DECREF_SET(__pyx_t_15, function);
-            }
+        __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_write, __pyx_n_s_write); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 56, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_14);
+        __pyx_t_15 = NULL;
+        if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_14))) {
+          __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_14);
+          if (likely(__pyx_t_15)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+            __Pyx_INCREF(__pyx_t_15);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_14, function);
           }
-          __pyx_t_4 = (__pyx_t_14) ? __Pyx_PyObject_Call2Args(__pyx_t_15, __pyx_t_14, __pyx_v_data) : __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_v_data);
-          __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
-          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-          /* "Process.pyx":56
- *             if rgb != [0, 0, 0]:
- *                 concentration = RGB_to_Concentration(rgb)
- *                 if concentration != 0.0:             # <<<<<<<<<<<<<<
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
- *                     file_write.file_write(data)
- */
         }
+        __pyx_t_4 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_14, __pyx_t_15, __pyx_v_data) : __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_v_data);
+        __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
         /* "Process.pyx":54
- *         for y in range(W):
  *             rgb = [Scan.item(x, y, 2), Scan.item(x, y, 1), Scan.item(x, y, 0)]
- *             if rgb != [0, 0, 0]:             # <<<<<<<<<<<<<<
- *                 concentration = RGB_to_Concentration(rgb)
- *                 if concentration != 0.0:
+ *             concentration = RGB_to_Concentration(rgb)
+ *             if concentration > 1.0:             # <<<<<<<<<<<<<<
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
+ *                 file_write.write(data)
  */
       }
     }
   }
 
-  /* "Process.pyx":59
- *                     data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
- *                     file_write.file_write(data)
+  /* "Process.pyx":57
+ *                 data = "{x}, {y}, {z}, {concentration} \n".format(x=x, y=y, z=depth, concentration=concentration)
+ *                 file_write.write(data)
  *     file_write.close()             # <<<<<<<<<<<<<<
  *     return True
  */
-  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_write, __pyx_n_s_close); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_15);
-  __pyx_t_14 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-    __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_15);
-    if (likely(__pyx_t_14)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-      __Pyx_INCREF(__pyx_t_14);
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_file_write, __pyx_n_s_close); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_14);
+  __pyx_t_15 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_14))) {
+    __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_14);
+    if (likely(__pyx_t_15)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+      __Pyx_INCREF(__pyx_t_15);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_15, function);
+      __Pyx_DECREF_SET(__pyx_t_14, function);
     }
   }
-  __pyx_t_4 = (__pyx_t_14) ? __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_t_14) : __Pyx_PyObject_CallNoArg(__pyx_t_15);
-  __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_4 = (__pyx_t_15) ? __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_t_15) : __Pyx_PyObject_CallNoArg(__pyx_t_14);
+  __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "Process.pyx":60
- *                     file_write.file_write(data)
+  /* "Process.pyx":58
+ *                 file_write.write(data)
  *     file_write.close()
  *     return True             # <<<<<<<<<<<<<<
  */
@@ -4089,9 +4018,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_close, __pyx_k_close, sizeof(__pyx_k_close), 0, 0, 1, 1},
   {&__pyx_n_s_concentration, __pyx_k_concentration, sizeof(__pyx_k_concentration), 0, 0, 1, 1},
   {&__pyx_n_s_cv2, __pyx_k_cv2, sizeof(__pyx_k_cv2), 0, 0, 1, 1},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
-  {&__pyx_n_s_file_write, __pyx_k_file_write, sizeof(__pyx_k_file_write), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_imread, __pyx_k_imread, sizeof(__pyx_k_imread), 0, 0, 1, 1},
@@ -4101,7 +4027,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_open, __pyx_k_open, sizeof(__pyx_k_open), 0, 0, 1, 1},
   {&__pyx_n_s_os, __pyx_k_os, sizeof(__pyx_k_os), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_round, __pyx_k_round, sizeof(__pyx_k_round), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
@@ -4110,6 +4035,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_kp_s_txt, __pyx_k_txt, sizeof(__pyx_k_txt), 0, 0, 1, 0},
   {&__pyx_kp_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 0},
+  {&__pyx_n_s_write, __pyx_k_write, sizeof(__pyx_k_write), 0, 0, 1, 1},
   {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
   {&__pyx_kp_s_x_y_z_concentration, __pyx_k_x_y_z_concentration, sizeof(__pyx_k_x_y_z_concentration), 0, 0, 1, 0},
   {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
@@ -4119,7 +4045,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_n_s_round); if (!__pyx_builtin_round) __PYX_ERR(0, 37, __pyx_L1_error)
   __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 43, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 50, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5932,112 +5858,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     }
 }
 
-/* Print */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
-#endif
-
 /* CIntFromPy */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) ((int) 0 - (int) 1), const_zero = (int) 0;
@@ -6226,43 +6046,6 @@ raise_neg_overflow:
         "can't convert negative value to int");
     return (int) -1;
 }
-
-/* PrintOne */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
-#endif
 
 /* CIntFromPy */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
