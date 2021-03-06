@@ -1,5 +1,4 @@
-PET_Scans/
-API_Keys/
+pet_scans/
 Client/
 NPETM.Scans/
 *.html
