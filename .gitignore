@@ -2,3 +2,4 @@ pet_scans/
 Client/
 NPETM.Scans/
 *.html
+tests/
