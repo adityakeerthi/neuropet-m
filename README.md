@@ -6,7 +6,7 @@ The repository for NeuroPET-M: A Multimodal PET Scan Platform as a Novel Diagnos
 - [isef](https://github.com/adityakeerthi/neuropet-m/tree/main/material/isef)
   - [project_presentation](https://github.com/adityakeerthi/neuropet-m/blob/main/material/isef/project_presentation_isef_keerthi_aditya.pdf)
   - [quad_chart](https://github.com/adityakeerthi/neuropet-m/blob/main/material/isef/quad_chart_isef_keerthi_aditya.pdf)
-  - [research_plan](research_plan_isef_keerthi_aditya.pdf)
+  - [research_plan](https://github.com/adityakeerthi/neuropet-m/blob/main/material/isef/research_plan_isef_keerthi_aditya.pdf)
 - [sanofi](https://github.com/adityakeerthi/neuropet-m/tree/main/material/sanofi)
   - [project_poster](https://github.com/adityakeerthi/neuropet-m/blob/main/material/sanofi/project_poster_sanofi_biogenius_keerthi_aditya.pdf)
   - [project_write_up](https://github.com/adityakeerthi/neuropet-m/blob/main/material/sanofi/project_write_up_biogenius_keerthi_aditya.pdf)
